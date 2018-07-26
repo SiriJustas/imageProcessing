@@ -52,7 +52,7 @@ function gaussianBlurForGrayScale(taskai){
 					}
 				}
 				pix[i][j] = tempSumG;
-				tempSumG = 0;
+				tempSumG=0;
 			}
 			
 		}
@@ -73,7 +73,7 @@ function gaussianKernel(sgm,sz){
 			eil[j] = (1/(2*22/7*Math.pow(sigma,2)))*Math.pow(e,(-1*((Math.pow(x,2)+Math.pow(y,2))/(2*Math.pow(sigma,2)))));	
 			kernelSum+=eil[j];
 		}
-			ernel[i]=eil;
+			kernel[i]=eil;
 	}
 	for(var i =0; i<parseInt(kernelSize/2)+1; i++, y++){
 		for(var j=0; j<parseInt(kernelSize/2)+1; j++, x++){
