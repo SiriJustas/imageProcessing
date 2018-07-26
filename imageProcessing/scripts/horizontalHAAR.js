@@ -1,6 +1,5 @@
-function pirmasPozymisGen(tas,gray,h,s){
+function horizontalHAAR(tas,h,s){
 	var pix = tas;
-	var gr = gray;
 	var hei = h;
 	var size = s;
 	var res = [];
