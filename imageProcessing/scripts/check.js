@@ -18,9 +18,9 @@ function check(pixs, bin, pixscopy, ct, atr){
 			for(var i2=-4, i3=0; i2<parseInt(attribute.length/2)+1; i2++, i3++){
 				for(var j2=-4, j3=0; j2<parseInt(attribute[i3].length/2)+1; j2++, j3++){
 					if(pixBinary[i+i2][j+j2]==attribute[i3][j3] && pixBinary[i+i2][j+j2]==attribute[i3][j3]){
-						if(pixCopy[i][j].red>pixCopy[i][j].green&&pixCopy[i][j].red>pixCopy[i][j].blue){
+						//if(pixCopy[i][j].red>pixCopy[i][j].green&&pixCopy[i][j].red>pixCopy[i][j].blue){
 							check++;
-						}
+						//}
 					}
 				}
 			}
@@ -42,7 +42,7 @@ function check(pixs, bin, pixscopy, ct, atr){
 				}
 			}
 			else{
-				gretimas=near;
+				near=false;
 			}
 			check=0;
 		}
