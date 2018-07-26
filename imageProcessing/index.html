@@ -1,6 +1,14 @@
 <html>
 	<head>
 		<script src="scripts/reader.js" type="text/javascript"></script>
+		<script src="scripts/gaussianBlur.js" type="text/javascript"></script>
+		<script src="scripts/draw.js" type="text/javascript"></script>
+		<script src="scripts/fast.js" type="text/javascript"></script>
+		<script src="scripts/horizontalHAAR.js" type="text/javascript"></script>
+		<script src="scripts/output.js" type="text/javascript"></script>
+		<script src="scripts/rgbToGray.js" type="text/javascript"></script>
+		<script src="scripts/searchRect.js" type="text/javascript"></script>
+
 		<style>
 		img{
 			width:auto;
@@ -15,11 +23,56 @@
 		</style>
 	</head>
 <body>
+	<image></image>
 	<canvas id = "canvasas">Your browser does not support the HTML5 canvas tag.</canvas>
 	<canvas id = "canvasas2">Your browser does not support the HTML5 canvas tag.</canvas>
 	<script>
+	var pav = document.getElementsByTagName('img')[0];
+	pav.crossOrigin = "Anonymous";
+	pav.setAttribute('src','https://i.imgur.com/yBRNAO8.jpg');
+	
+	pav.addEventListener("load", function() {
 	var pix = read();
+	var grayScale = rgbToGrayScale(pix);
+	var blurredPix = gaussianBlur(pix);
+	var blurredGrayScale = gaussianBlurForGrayScale(grayScale);
+
+
+
+	var pav = document.getElementsByTagName("img")[0];
+	var canvass2 = document.getElementById("canvasas2");
+	var ctx2 = canvass2.getContext("2d");
+	canvass2.width = pav.naturalWidth;
+	canvass2.height = pav.naturalHeight;
+	var imagedata = ctx2.createImageData(pav.naturalWidth, pav.naturalHeight);
+
+
+	var index = 0;
+	for(var i =0; i<pix.length; i++){
+		for(var j = 0; j<pix[i].length; j++){
+			if(fast(grayScale,j,i)){
+				imagedata.data[index+0] = 0;
+				imagedata.data[index+1] = 0;
+				imagedata.data[index+2] = 0;
+			    imagedata.data[index+3] = 255;
+			}
+			else{
+			imagedata.data[index+0] = 255;
+			imagedata.data[index+1] = 255;
+			imagedata.data[index+2] = 255;
+			imagedata.data[index+3] = 255;
+			}
+			index+=4;
+		}
+	}
+
+	output(imagedata,ctx2);
+
+
+
+
 	console.log(pix);
+	});
 	</script>
 </body>
 </html>
