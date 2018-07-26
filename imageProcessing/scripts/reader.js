@@ -1,8 +1,7 @@
 function read(){
-	var pav = document.createElement('img');
-	pav.crossOrigin = "Anonymous";
-	pav.setAttribute('src','https://i.imgur.com/yBRNAO8.jpg');
-	document.body.appendChild(pav);
+	var pav = document.getElementsByTagName('img')[0];
+	//pav.crossOrigin = "Anonymous";
+	//pav.setAttribute('src','https://i.imgur.com/yBRNAO8.jpg');
 	// https://i.imgur.com/RRBuV8L.gif?1
 	//https://i.imgur.com/lDM3nvP.jpg
 	//console.log(pav);
@@ -43,8 +42,6 @@ function read(){
 		whola[l] = whola2;
 	}
 	*/
-	pav.addEventListener("load", function() {
-
 		width = pav.naturalWidth;
 		height = pav.naturalHeight;
 		//console.log(width);
@@ -87,7 +84,6 @@ function read(){
 			//alpha[a] = rowA;
 			pix[a]=pix2;
 		}
-	});
 		//console.log(pikseliai);
 		//most = whola[0][0][0];
 		//r=0;
