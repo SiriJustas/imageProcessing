@@ -38,7 +38,7 @@ function gaussianBlurForGrayScale(taskai){
 	var sigma = 500;
 	var size = 15;
 	var kernel = gaussianKernel(sigma,size);
-	var tempSumG
+	var tempSumG = 0;
 	var kernelSize = kernel.length;
 	var parsedKernelSize = parseInt(kernelSize/2);
 	for(var i =0; i<pix.length; i++){
@@ -52,9 +52,7 @@ function gaussianBlurForGrayScale(taskai){
 					}
 				}
 				pix[i][j] = tempSumG;
-				tempSumR = 0;
 				tempSumG = 0;
-				tempSumB = 0;
 			}
 			
 		}
