@@ -77,10 +77,9 @@
 	var haarAttribute = horizontalHAAR(blurredPix,8,6);
 	//console.log(haarAttribute);
 	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
-	console.log(res);
+	//console.log(res);
 	if(res.length>0){
 		for(var j=0; j<res.length; j++){
-			console.log("pies");
 			//ctx2.save();
 			drawPlus(ctx2,res[j].xx,res[j].yy);
 			//ctx2.restore();
