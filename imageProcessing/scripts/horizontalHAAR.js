@@ -1,5 +1,4 @@
-function horizontalHAAR(tas,h,s){
-	var pix = tas;
+function horizontalHAAR(h,s){
 	var hei = h;
 	var size = s;
 	var res = [];

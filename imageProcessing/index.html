@@ -55,16 +55,16 @@
 		for(var j = 0; j<pix[i].length; j++){
 			if(fast(grayScale,j,i)){
 				tempBin[j] = 0;
-				imagedata.data[index+0] = 0;
-				imagedata.data[index+1] = 0;
-				imagedata.data[index+2] = 0;
+				imagedata.data[index+0] = grayScale[i][j];
+				imagedata.data[index+1] = grayScale[i][j];
+				imagedata.data[index+2] = grayScale[i][j];
 			    imagedata.data[index+3] = 255;
 			}
 			else{
 			tempBin[j] = 255;
-			imagedata.data[index+0] = 255;
-			imagedata.data[index+1] = 255;
-			imagedata.data[index+2] = 255;
+			imagedata.data[index+0] = grayScale[i][j];
+			imagedata.data[index+1] = grayScale[i][j];
+			imagedata.data[index+2] = grayScale[i][j];
 			imagedata.data[index+3] = 255;
 			}
 			index+=4;
@@ -74,10 +74,36 @@
 
 	
 	output(imagedata,ctx2);
-	var haarAttribute = horizontalHAAR(blurredPix,8,6);
+
+	var haarAttribute = horizontalHAAR(8,6);
+	console.log(haarAttribute);
+	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
+	console.log(res);
+	if(res.length>0){
+		for(var j=0; j<res.length; j++){
+			//ctx2.save();
+			drawPlus(ctx2,res[j].xx,res[j].yy);
+			//ctx2.restore();
+		}
+	}
+	
+	var haarAttribute = horizontalHAAR(6,4);
 	//console.log(haarAttribute);
 	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
-	//console.log(res);
+	console.log(res);
+	if(res.length>0){
+		for(var j=0; j<res.length; j++){
+			//ctx2.save();
+			drawPlus(ctx2,res[j].xx,res[j].yy);
+			//ctx2.restore();
+		}
+	}
+	/*
+
+	var haarAttribute = horizontalHAAR(10,6);
+	//console.log(haarAttribute);
+	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
+	console.log(res);
 	if(res.length>0){
 		for(var j=0; j<res.length; j++){
 			//ctx2.save();
@@ -86,6 +112,7 @@
 		}
 	}
 
+	*/
 
 	//console.log(pix);
 	});
