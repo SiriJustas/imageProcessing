@@ -6,13 +6,13 @@ function drawPlus(cont,x,y){
 	//ctx.strokeStyle="#FF0000";
 	ctx.strokeStyle=generateHEX();
 	ctx.moveTo(x,y);
-	ctx.lineTo(x+9,y);
+	ctx.lineTo(x+3,y);
 	ctx.moveTo(x,y);
-	ctx.lineTo(x,y+9);
+	ctx.lineTo(x,y+3);
 	ctx.moveTo(x,y);
-	ctx.lineTo(x-9,y);
+	ctx.lineTo(x-3,y);
 	ctx.moveTo(x,y);
-	ctx.lineTo(x,y-9);
+	ctx.lineTo(x,y-3);
 	ctx.stroke();
 	ctx.restore();
 }

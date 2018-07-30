@@ -38,7 +38,7 @@ function check(pixs, bin, pixscopy, ct, atr){
 					}
 					result1[resIndex] = object;
 					resIndex++;
-					near = true;
+					near = false;
 				}
 			}
 			else{

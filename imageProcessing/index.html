@@ -9,6 +9,7 @@
 		<script src="scripts/rgbToGray.js" type="text/javascript"></script>
 		<script src="scripts/searchRect.js" type="text/javascript"></script>
 		<script src="scripts/check.js" type="text/javascript"></script>
+		<script src="scripts/verticalHAAR.js" type="text/javascript"></script>
 
 		<style>
 		img{
@@ -86,7 +87,40 @@
 			//ctx2.restore();
 		}
 	}
-	
+	var haarAttribute = verticalHAAR(8,6);
+	console.log(haarAttribute);
+	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
+	console.log(res);
+	if(res.length>0){
+		for(var j=0; j<res.length; j++){
+			//ctx2.save();
+			drawPlus(ctx2,res[j].xx,res[j].yy);
+			//ctx2.restore();
+		}
+	}
+	var haarAttribute = horizontalHAAR(10,6);
+	console.log(haarAttribute);
+	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
+	console.log(res);
+	if(res.length>0){
+		for(var j=0; j<res.length; j++){
+			//ctx2.save();
+			drawPlus(ctx2,res[j].xx,res[j].yy);
+			//ctx2.restore();
+		}
+	}
+	var haarAttribute = verticalHAAR(10,6);
+	console.log(haarAttribute);
+	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
+	console.log(res);
+	if(res.length>0){
+		for(var j=0; j<res.length; j++){
+			//ctx2.save();
+			drawPlus(ctx2,res[j].xx,res[j].yy);
+			//ctx2.restore();
+		}
+	}
+	/*
 	var haarAttribute = horizontalHAAR(8,4);
 	//console.log(haarAttribute);
 	var res = check(blurredPix,binaryPix,pix,ctx2, haarAttribute);
@@ -327,7 +361,7 @@
 			//ctx2.restore();
 		}
 	}
-
+*/
 	//console.log(pix);
 	});
 	</script>
