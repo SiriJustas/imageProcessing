@@ -3,8 +3,8 @@ function drawPlus(cont,x,y){
 	ctx.save();
 	ctx.beginPath();
 	ctx.globalAlpha = 1;
-	ctx.strokeStyle="#FF0000";
-	//ctx.strokeStyle=generateHEX();
+	//ctx.strokeStyle="#FF0000";
+	ctx.strokeStyle=generateHEX();
 	ctx.moveTo(x,y);
 	ctx.lineTo(x+9,y);
 	ctx.moveTo(x,y);
