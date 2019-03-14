@@ -1,0 +1,140 @@
+<html>
+	<head>
+		<style>
+		img{
+			width:auto;
+			height:auto;
+		}
+		canvas{
+			width:auto;
+			height:auto;
+			position:relative;
+		}
+		</style>
+	</head>
+<body>
+	<image></image>
+	<canvas id = "canvasas">Your browser does not support the HTML5 canvas tag.</canvas>
+	<canvas id = "canvasas2">Your browser does not support the HTML5 canvas tag.</canvas>
+	<script>
+		var pav = document.getElementsByTagName('img')[0];
+		pav.crossOrigin = "Anonymous";
+		pav.setAttribute('src','https://i.imgur.com/yBRNAO8.jpg');
+
+		pav.addEventListener("load", function() {
+
+		var pix = read();
+		var grayScale = rgbToGrayScale(pix);
+
+		var pav = document.getElementsByTagName("img")[0];
+		var canvass2 = document.getElementById("canvasas2");
+		var ctx2 = canvass2.getContext("2d");
+		canvass2.width = pav.naturalWidth;
+		canvass2.height = pav.naturalHeight;
+		var imagedata = ctx2.createImageData(pav.naturalWidth, pav.naturalHeight);
+		var klusteriuKiekis = 20;
+		var spalvos = [];
+		var raudona = [];
+		var zalia = [];
+		var melyna = [];
+
+		var step = 255/klusteriuKiekis;
+		for(var ss = 0; ss<klusteriuKiekis; ss++){
+			spalvos[ss]=ss*step;
+			raudona[ss] = Math.floor(Math.random() * 256);  
+			zalia[ss] = Math.floor(Math.random() * 256); 
+			melyna[ss] = Math.floor(Math.random() * 256); 
+		}
+		var index = 0;
+		for(var i =0; i<pix.length; i++){
+			for(var j = 0; j<pix[i].length; j++){
+				for(var sp = 0; sp<spalvos.length; sp++){
+					if(sp>0 && sp<spalvos.length-1){
+						if(grayScale[i][j]>spalvos[sp-1]&&grayScale[i][j]<spalvos[sp+1]){
+							imagedata.data[index+0] = raudona[sp];
+							imagedata.data[index+1] = zalia[sp];
+							imagedata.data[index+2] = melyna[sp];
+				    		imagedata.data[index+3] = 255;
+						}
+					}
+					else{
+						if(grayScale[i][j]<spalvos[1]){
+							imagedata.data[index+0] = raudona[0];
+							imagedata.data[index+1] = zalia[0];
+							imagedata.data[index+2] = melyna[0];
+				    		imagedata.data[index+3] = 255;
+						}
+						if(grayScale[i][j]>spalvos[spalvos.length-2]){
+							imagedata.data[index+0] = raudona[spalvos.length-1];
+							imagedata.data[index+1] = zalia[spalvos.length-1];
+							imagedata.data[index+2] = melyna[spalvos.length-1];
+				    		imagedata.data[index+3] = 255;
+						}
+					}
+				}
+				index+=4;
+			}
+		}
+		output(imagedata,ctx2);
+
+	});
+
+
+		function output(imgData,ct){
+			var imagedata = imgData;
+			var pav = document.getElementsByTagName("img")[0];
+			width = pav.naturalWidth;
+			height = pav.naturalHeight;
+			var ctx = ct;
+			ctx.putImageData(imagedata, 0, 0);
+		}
+		function read(){
+			var pav = document.getElementsByTagName('img')[0];
+			var width = 0 ;
+			var height = 0;
+			var canvass = document.getElementById("canvasas");
+			var ctx = canvass.getContext("2d");;
+			var pix = [];
+				width = pav.naturalWidth;
+				height = pav.naturalHeight;
+				canvass.width = width;
+				canvass.height = height;
+				ctx.drawImage(pav,0,0,width,height);
+				ctx = canvass.getContext("2d");
+				for(var a = 0; a<height; a++){
+					var rowR = [];
+					var rowG = [];
+					var rowB = [];
+					var rowA = [];
+					var pix2 = [];
+					for(var p = 0; p<width; p++){
+						var imageData=ctx.getImageData(p,a,1,1);
+						var objektas = {
+							red: imageData.data[0], 
+							green: imageData.data[1], 
+							blue: imageData.data[2], 
+							alpha: imageData.data[3], 
+							ya: a,
+							xa: p,
+						}
+						pix2[p]=objektas;
+					}
+					pix[a]=pix2;
+				}
+
+			return pix;
+		}
+		function rgbToGrayScale(rgb){
+			var grayscale = [];
+			for(var i=0; i<rgb.length; i++){
+				var temp = [];
+				for(var j = 0; j<rgb[i].length; j++){
+					temp[j] = ((rgb[i][j].red*0.3)+(rgb[i][j].green*0.59)+(rgb[i][j].blue*0.11));
+				}
+				grayscale[i] = temp;
+			}
+			return grayscale;
+		}
+	</script>
+</body>
+</html>
