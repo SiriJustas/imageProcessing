@@ -10,7 +10,7 @@ Pure JS library for imageProcessing. Goal was to make a library for patterns (or
 ### RGB to Grayscale 
 ### Symbols drawing
 ### Different HAAR features generation and applying
-
+### Segmentation (single file based on this library, without includes - alpha 03/14)
 
 
 
